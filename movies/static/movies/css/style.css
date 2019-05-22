@@ -1,0 +1,62 @@
+.glyphicon-star {
+    color: #CCCCCC;
+    font-size: 16px;
+}
+
+.brand-logo img {
+    height: 40px;
+    margin: 12px;
+}
+
+.movielogos {
+    width: 40px;
+    height: 30px;
+}
+
+.index-img{
+  width: 100%;
+  object-fit: cover;
+  height: 20rem;
+}
+
+#detail-img {
+    margin: 20px;
+    border: 20px;
+    width: 420px;
+    height: 350px;
+    float: left;
+
+}
+
+#cart-img{
+    margin: 10px;
+    border: 10px;
+    width: 220px;
+    height: 150px;
+}
+
+#buttons-movie{
+    float: left;
+}
+
+#cart-btn {
+    margin: 10px;
+}
+
+.search{
+  height: 64px;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.wrapper{
+  margin-top: 2rem;
+}
+
+.signup{
+    margin-top: 5rem !important;
+}
+
+.signup h3{
+    margin-top: 0px;
+}

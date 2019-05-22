@@ -1,0 +1,12 @@
+#!"/Users/neofytosneocleous/Desktop/Year 2/CM2305-Group Project/notflix/venv/bin/python3"
+# EASY-INSTALL-ENTRY-SCRIPT: 'wq.core==1.1.0','console_scripts','wq'
+__requires__ = 'wq.core==1.1.0'
+import re
+import sys
+from pkg_resources import load_entry_point
+
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw?|\.exe)?$', '', sys.argv[0])
+    sys.exit(
+        load_entry_point('wq.core==1.1.0', 'console_scripts', 'wq')()
+    )

@@ -1,0 +1,59 @@
+{% extends "movies/base.html" %}
+
+{% block title %}
+Checkout
+{% endblock %}
+
+{% block body %}
+<h1>Checkout</h1>
+
+<div class="order-info">
+    <h3>Your order</h3>
+    <ul>
+        {% for item in cart %}
+        <li>{{ item.movie.title }} <span>£{{ item.total_price }}</span></li>
+        {% endfor %}
+    </ul>
+    <p>Total: £{{ cart.get_total_price }}</p>
+</div>
+
+<div class="checkout">
+
+    <h3>Your order will be delivered to:</h3>
+
+    <p>{{ user.first_name }} {{ user.last_name }}</p>
+    <p>{{ user.profile.address }}</p>
+    <p>{{ user.profile.city }},</p>
+    <p>{{ user.profile.postcode }} </p>
+
+    <h3>Payment details:</h3>
+
+<form {#  action="." method="post">
+        <table>
+            {% for field in form %}
+            <tr>
+                <th>{{ field.label_tag }}</th>
+                <th>{{ field }}</th>
+                <th>{{ field.errors }}</th>
+            </tr>
+            {% endfor %}
+        </table>
+
+
+{#            <p>{{ field.label_tag }}</p>#}
+{#            <p> {{ field }}</p>#}
+{#            <p> {{ field.errors }}</p>#}
+
+
+</br>
+
+            <button id="checkout-btn" type="submit" value="submitOrder" class="btn #f44336 red"><i class="material-icons">payment</i>Place Order</button>
+
+         {% csrf_token %}
+    </form>
+
+ </p>
+</div>
+
+
+{% endblock %}

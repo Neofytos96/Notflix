@@ -1,0 +1,81 @@
+{% extends 'movies/base.html' %}
+{% block title %}{{ movie }}{% endblock %}
+{% block movies_active %}active{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col s12 m6">
+        <img id="detail-img" src="https://placeimg.com/640/480/any?cache={{ movie.id }}" >
+    </div>
+    <div class="col s12 m6">
+        <h3>{{ movie.movie_title }}</h3>
+        <div>
+            <span class="badge new grey left" data-badge-caption="{{ movie.genre }}" style="margin-left: 0px;"></span>
+            <span class="badge new grey left" data-badge-caption="£{{ movie.price }}"></span> <br>
+        </div>
+        <br>
+        <div>
+            <form action="{% url 'movies:like_movie' %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                {% if is_liked %}
+                    <button type="submit" name="movie_id" value="{{ movie.id }}" class="waves-effect waves-light btn">Remove Like</button>
+                {% else %}
+                    <button type="submit" name="movie_id" value="{{ movie.id }}" class="waves-effect waves-light btn green">Like</button>
+                {% endif %}
+            </form>
+            <form action="{% url 'movies:dislike_movie' %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                {% if is_disliked %}
+                    <button type="submit" name="movie_id" value="{{ movie.id }}" class="waves-effect waves-light btn" >Remove Dislike</button>
+                {% else %}
+                    <button type="submit" name="movie_id" value="{{ movie.id }}" class="waves-effect waves-light btn red">Dislike</button>
+                {% endif %}
+            </form>
+            
+              - {{ total_likes }} Like{{ total_likes|pluralize }}
+            {{ total_dislikes }} Dislike{{ total_dislikes|pluralize }}
+        </div>
+        <div><br>{{ movie.description }}<br>
+
+
+            <form action="{% url 'cart:cart_add' movie.id %}" method="post" style="display:inline;">
+                {{cart_movie_form}}
+                {% csrf_token %}
+                <br>
+                <button type="submit" class="btn #f44336 red"><i class="material-icons">add_shopping_cart</i> Add to Cart</button>
+            </form></div>
+    </div>
+</div>
+<h3>Add your review</h3>
+
+        <form action="{% url 'movies:add_review' movie.id %}" method="post" style="display:inline;">
+            {{ form }}
+            {% csrf_token %}
+
+            <br>
+            <button type="submit" class="btn #f44336 red"><i class="material-icons"></i> Add Review</button>
+        </form>
+
+    {% if movie.review_set.all %}
+            <h5>{{ movie.average_rating }} average rating</h5>
+
+        <div class="row">
+            {% for review in movie.review_set.all %}
+                <div class="col-xs-6 col-lg-4">
+                    <h5>{{ review.user_name }}</h5>
+                    <h6>Rated {{ review.rating }} out of 5</h6>
+                    <h6>Comment: {{ review.comment }}</h6>
+{#                    <h6>Rated {{ review.rating }} of 5 by <a href="{% url 'movies:user_review_list' review.user_name %}" >{{ review.user_name }}</a></h6>#}
+{#                    <h5><a href="{% url 'movies:review_detail' review.id %}">#}
+{#                        Read more#}
+{#                    </a></h5>#}
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No reviews for this movie yet</p>
+    {% endif %}
+
+
+
+{% endblock %}

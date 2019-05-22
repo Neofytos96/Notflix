@@ -1,0 +1,44 @@
+{% extends 'movies/base.html' %}
+
+{% block body %}
+{#  <h2>Login</h2>#}
+{#  <form class="site-form" action="{% url 'users:login' %}" method="post">#}
+{#    {% csrf_token %}#}
+{#    {{ form }}#}
+{#      {% if request.GET.next %}#}
+{#           <p>Your account doesn't have access to this page. To proceed,#}
+{#      please login with an account that has access.</p>#}
+{#        <input type="hidden" name="next" value="{{ request.GET.next }}">#}
+{#      {% endif %}#}
+{#    <input type="submit" value="Login"> </input>#}
+{#  </form>#}
+
+<div class="row">
+    <div class="col s12 m6 l4 offset-m3 offset-l4">
+        <div>
+            <h3>Login</h3>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="center-align">
+                    
+                    <input type="submit" value="Login" class="btn red">
+                </div>                
+            </form>
+        </div>
+        <div class="card-panel signup z-depth-1">
+            <form action="{% url 'users:signup'%}"><br>
+                <div class="center-align">
+                        <h3>New Customer?</h3>
+                <input type="submit" value="Sign up" class="btn red"/>
+
+            </div>    
+        </form>
+        
+        </div>
+    </div>
+    <!-- <div class="col s12 m5 l4">
+
+    </div> -->
+</div>
+{% endblock %}
